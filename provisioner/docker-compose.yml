@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    container_name: postgres
+    image: postgres:12.2
+    restart: always
+    ports:
+     - "5432:5432"
+    volumes:
+     - /opt/postgresql/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: heroes
+      POSTGRES_USER: heroes_user
+      POSTGRES_PASSWORD: password

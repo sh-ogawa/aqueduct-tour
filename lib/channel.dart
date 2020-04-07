@@ -22,7 +22,7 @@ class HeroesChannel extends ApplicationChannel {
 
     final dataModel = ManagedDataModel.fromCurrentMirrorSystem();
     final persistentStore = PostgreSQLPersistentStore.fromConnectionInfo(
-        "heroes_user", "password", "localhost", 5432, "heroes");
+        "heroes_user", "password", "192.168.240.11", 5432, "heroes");
 
     context = ManagedContext(dataModel, persistentStore);
 
