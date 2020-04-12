@@ -1,6 +1,8 @@
 # heroes
 
 ## Running the Application Locally
+Run `cd provisioner`
+Run `vagrant up or docker-compose up -d`
 
 Run `aqueduct db upgrade --connect postgres://heroes_user:password@localhost:5432/heroes`
 
