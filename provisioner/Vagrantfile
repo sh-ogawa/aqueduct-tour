@@ -26,11 +26,11 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :shell, :inline => <<-EOT
     sudo amazon-linux-extras install -y ansible2
-    sudo ansible-playbook /vagrant/provisioner/local-site.yml
+    sudo ansible-playbook /vagrant/local-site.yml
   EOT
 
   config.vm.provision :shell, run: "always", :inline => <<-EOT
-    sudo docker-compose -f /vagrant/provisioner/docker-compose.yml up -d
+    sudo docker-compose -f /vagrant/docker-compose.yml up -d
   EOT
 
 end
