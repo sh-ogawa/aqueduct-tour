@@ -1,6 +1,6 @@
 database:
   host: 192.168.240.11
-  port: 5432
+  port: 15432
   username: heroes_user
   password: password
   databaseName: heroes
