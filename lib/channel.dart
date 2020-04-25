@@ -55,7 +55,12 @@ class HeroesChannel extends ApplicationChannel {
         .link(() => RegisterController(context, authServer));
 
     router
+        .route('/auth/token')
+        .link(() => AuthController(authServer));
+
+    router
         .route('/heroes/[:id]')
+        .link(() => Authorizer.bearer(authServer))
         .link(() => HeroesController(context));
 
     return router;
