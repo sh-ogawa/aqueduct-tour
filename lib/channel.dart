@@ -1,5 +1,8 @@
+import 'package:aqueduct/managed_auth.dart';
+import 'package:heroes/model/user.dart';
 import 'package:heroes/controller/heroes_controller.dart';
 
+import 'controller/register_controller.dart';
 import 'heroes.dart';
 
 /// This type initializes an application.
@@ -9,6 +12,7 @@ import 'heroes.dart';
 class HeroesChannel extends ApplicationChannel {
 
   ManagedContext context;
+  AuthServer authServer;
 
   /// Initialize services in this method.
   ///
@@ -31,6 +35,9 @@ class HeroesChannel extends ApplicationChannel {
 
     context = ManagedContext(dataModel, persistentStore);
 
+    final authStorage = ManagedAuthDelegate<User>(context);
+    authServer = AuthServer(authStorage);
+
   }
 
   /// Construct the request channel.
@@ -44,16 +51,12 @@ class HeroesChannel extends ApplicationChannel {
     final router = Router();
 
     router
+        .route('/register')
+        .link(() => RegisterController(context, authServer));
+
+    router
         .route('/heroes/[:id]')
         .link(() => HeroesController(context));
-
-    // Prefer to use `link` instead of `linkFunction`.
-    // See: https://aqueduct.io/docs/http/request_controller/
-    router
-      .route("/example")
-      .linkFunction((request) async {
-        return Response.ok({"key": "value"});
-      });
 
     return router;
   }
